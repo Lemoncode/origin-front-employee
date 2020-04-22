@@ -1,29 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Máster Front End Online Lemoncode, trasnsversal project.
 
-### What is this repository for?
+# About Basefactor + Lemoncode
 
-- Quick summary
-- Version
-- [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+We are an innovating team of Javascript experts, passionate about turning your ideas into robust products.
 
-### How do I get set up?
+[Basefactor, consultancy by Lemoncode](http://www.basefactor.com) provides consultancy and coaching services.
 
-- Summary of set up
-- Configuration
-- Dependencies
-- Database configuration
-- How to run tests
-- Deployment instructions
+[Lemoncode](http://lemoncode.net/services/en/#en-home) provides training services.
 
-### Contribution guidelines
-
-- Writing tests
-- Code review
-- Other guidelines
-
-### Who do I talk to?
-
-- Repo owner or admin
-- Other community or team contact
+For the LATAM/Spanish audience we are running an Online Front End Master degree, more info: http://lemoncode.net/master-frontend
