@@ -8,19 +8,55 @@ import RightIcon from '@material-ui/icons/ChevronRight';
 import { literals } from 'core/i18n';
 import * as classes from './toolbar.styles';
 
-export const ToolbarComponent = () => {
+interface Props {
+  date: Date;
+  onNavigate: (direction: 'Left' | 'Right') => void;
+}
+
+const getMonthOfYear = (date: Date): string => {
+  const monthsOfYear = [
+    'Enero',
+    'Febrero',
+    'Marzo',
+    'Abril',
+    'Mayo',
+    'Junio',
+    'Julio',
+    'Agosto',
+    'Septiebre',
+    'Octubre',
+    'Noviembre',
+    'Diciembre',
+  ];
+  return `${monthsOfYear[date.getMonth()]} de ${date.getFullYear()}`;
+};
+
+export const ToolbarComponent: React.FC<Props> = ({ date, onNavigate }) => {
+  const handleOnClickLeft = () => onNavigate('Left');
+  const handleOnClickRight = () => onNavigate('Right');
+  const handleOnKeyUp = (event: KeyboardEvent) => {
+    if (/ArrowLeft|ArrowRight/.test(event.code)) {
+      onNavigate('ArrowLeft' === event.code ? 'Left' : 'Right');
+    }
+  };
+
+  React.useEffect(() => {
+    window.addEventListener('keyup', handleOnKeyUp);
+    return () => window.removeEventListener('keyup', handleOnKeyUp);
+  }, [onNavigate]);
+
   return (
     <Toolbar variant="dense">
       <Button className={classes.menuButton} variant="outlined">
         {literals.components.date.today}
       </Button>
-      <IconButton className={classes.menuButton}>
+      <IconButton className={classes.menuButton} onClick={handleOnClickLeft}>
         <LeftIcon />
       </IconButton>
-      <IconButton className={classes.menuButton}>
+      <IconButton className={classes.menuButton} onClick={handleOnClickRight}>
         <RightIcon />
       </IconButton>
-      <Typography>Febrero de 2020</Typography>
+      <Typography>{getMonthOfYear(date)}</Typography>
     </Toolbar>
   );
 };
