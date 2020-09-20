@@ -7,28 +7,43 @@ import {
 } from './components';
 import * as VM from './time.vm';
 import * as classes from './time.styles';
+import { getNextMonday, getPreviousMonday } from './time.helpers';
 
 interface Props {
-  projects: VM.Project[];
-  updateProject: (nameProject: string, assignment: VM.Assignment) => void;
   columns: string[];
   counters: VM.Counter[];
+  disabled: boolean;
+  projects: VM.Project[];
+  updateProject: (nameProject: string, assignment: VM.Assignment) => void;
+  updateWeek: (date: Date) => void;
+  week: Date;
 }
 
 export const TimeComponent: React.FC<Props> = ({
-  projects,
-  updateProject,
   columns,
   counters,
+  disabled,
+  projects,
+  updateProject,
+  updateWeek,
+  week,
 }) => {
   const handleOnChange = (nameProject: string, item: VM.Assignment) => {
     updateProject(nameProject, item);
   };
 
+  const handleOnNavigate = (direction: 'Left' | 'Right') => {
+    if (disabled) return;
+
+    updateWeek(
+      'Left' === direction ? getPreviousMonday(week) : getNextMonday(week)
+    );
+  };
+
   return (
     <>
       <Paper className={classes.paper}>
-        <ToolbarComponent />
+        <ToolbarComponent date={week} onNavigate={handleOnNavigate} />
         <TableComponent
           items={projects}
           onChange={handleOnChange}
